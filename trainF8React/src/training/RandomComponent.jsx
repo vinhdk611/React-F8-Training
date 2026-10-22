@@ -82,7 +82,7 @@ function RandomComponent2() {
             .then(data => {
                 setList(data)
             })
-            console.log('hello1')
+        console.log('hello1')
     }, [page])
 
     //scroll
@@ -97,7 +97,7 @@ function RandomComponent2() {
         chỗ này nếu mounted lại mà lướt xuống thì sẽ bị tạo ra 2 window event
         --> memory leak
         */
-       console.log('hello2')
+        console.log('hello2')
         window.addEventListener('scroll', handleScroll)
         //cleanup function-hàm trả về của useEffect là hàm cleanup
         return () => {
@@ -208,12 +208,12 @@ function RandomComponent4() {
     return (
         <div>
             <input
-            type="file"
-            onChange={handlePreviewAvt}
+                type="file"
+                onChange={handlePreviewAvt}
             >
             </input>
             {pic && (
-                <img src={pic.preview} width="80%"/>
+                <img src={pic.preview} width="80%" />
             )}
         </div>
     )
@@ -232,11 +232,12 @@ const lessons = [
         name: 'Arrow function'
     }
 ]
-export default function RandomComponent() {
+function RandomComponent5() {
     const [lessionId, setLessionId] = useState(1)
     //mỗi khi lessionId thay đổi, useEffect sẽ được gọi
     useEffect(() => {
-        const handleComment = (detail) => {
+        //chỉ lấy biến detail từ đối tượng event
+        const handleComment = ({ detail }) => {
             console.log(detail)
         }
         //chỉ lấy comment của kênh được chọn
@@ -251,17 +252,59 @@ export default function RandomComponent() {
         <div>
             <ul>
                 {lessons.map(lesson => (
-                    <li 
-                    key={lessionId}
-                    style={{
-                        color: lessionId === lesson.id ?
-                        '#333' :
-                        'rgb(255, 43, 60)'
-                    }}
-                    onClick={() => setLessionId(lessionId.id)}
-                    >{lesson}</li>
+                    <li
+                        key={lesson.id}
+                        style={{
+                            color: lessionId === lesson.id ?
+                                '#333' :
+                                'rgb(255, 43, 60)'
+                        }}
+                        onClick={() => setLessionId(lesson.id)}
+                    >{lesson.title}</li>
                 ))}
             </ul>
         </div>
     )
 }
+
+const rooms = [
+    { id: 1, name: 'Phòng chat 1' },
+    { id: 2, name: 'Phòng chat 2' },
+    { id: 3, name: 'Phòng chat 3' }
+]
+export default function RandomComponent() {
+    const [roomId, setRoomId] = useState(1)
+
+    useEffect(() => {
+        const handleChat = ({info}) =>{
+            console.log(info)
+        }
+
+        window.addEventListener(`chat-${roomId}`, handleChat)
+
+        return () => {
+            window.removeEventListener(`chat-${roomId}`, handleChat)
+        }
+    }, [roomId])
+
+    return (
+        <div>
+            <ul>
+                {rooms.map(room => (
+                    <li
+                    key={room.id}
+                    style={{
+                        color: room.id === roomId ?
+                        '#00ff3c' :
+                        '#00000000'
+                    }}
+                    onChange={() => setRoomId(room.id)}
+                    >
+                        {room.name}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
+
