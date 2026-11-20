@@ -6,6 +6,7 @@ import UseStateTraining from './training/UseStateTrain.jsx'
 import UseEffectTrain from './training/UseEffectTrain.jsx'
 import UseLayoutEffectTrain from './training/UseLayoutEffectTrain.jsx'
 import UseRefTrain from './training/UseRefTrain.jsx'
+import UseReducerTrain from './training/useReducerPack/UseReducerTrain.jsx'
 //fake comments
 //tạo custom event, mỗi 2s thì viết comment này
 // function emitComment(id){
@@ -36,6 +37,6 @@ import UseRefTrain from './training/UseRefTrain.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UseRefTrain/>
+    <UseReducerTrain/>
   </StrictMode>,
 )
