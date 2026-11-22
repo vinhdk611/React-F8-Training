@@ -182,3 +182,9 @@
     border-right-color: var(--border);
   }
 }
+
+.dark {
+  color: #fff;
+  background-color: black;
+}
+

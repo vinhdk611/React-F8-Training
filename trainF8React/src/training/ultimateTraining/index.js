@@ -1,0 +1,5 @@
+export { default as StoreProvider } from './myContext/Provider'
+export { default as StoreContext } from './myContext/UltimateContext'
+export * from './hook/hooks'
+export * from './reducer/reducer'
+export * as Type from './reducer/constaint'
